@@ -30,6 +30,7 @@ const electronBuilderArgs = [
   '--publish',
   'always',
   '-c.publish.provider=github',
+  '-c.publish.releaseType=release',
   `-c.publish.owner=${owner}`,
   `-c.publish.repo=${repo}`,
 ]
@@ -48,4 +49,3 @@ child.on('exit', (code, signal) => {
 
   process.exit(code ?? 1)
 })
-

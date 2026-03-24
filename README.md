@@ -56,6 +56,12 @@ npm run dev
 npm run build
 ```
 
+### Releases and Auto Update
+
+- GitHub Release phai o trang thai `published`, khong duoc de `draft`, thi `electron-updater` moi doc duoc feed cap nhat.
+- Script publish da duoc cau hinh de tao release type `release` thay vi `draft`.
+- Neu push tag moi, hay kiem tra release tren GitHub da hien `Latest` hoac co URL dang `releases/tag/vX.Y.Z`.
+
 ---
 
 ## 📖 Usage Guide
