@@ -12,7 +12,7 @@ import {
 import electronUpdater from 'electron-updater'
 import JSZip from 'jszip'
 import { spawn } from 'node:child_process'
-import { constants as fsConstants } from 'node:fs'
+import { constants as fsConstants, existsSync } from 'node:fs'
 import { access, copyFile, mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -43,6 +43,7 @@ import {
 
 const dataFileName = 'codex-desk-state.json'
 const { autoUpdater } = electronUpdater
+const currentDirectory = path.dirname(fileURLToPath(import.meta.url))
 const accountWindows = new Map<string, BrowserWindow>()
 let mainWindow: BrowserWindow | null = null
 let codexWindow: BrowserWindow | null = null
@@ -58,6 +59,11 @@ const syncProbeUrls = [
   'https://chatgpt.com/backend-api/me',
   'https://chatgpt.com/backend-api/models',
 ] as const
+const runtimeIconCandidates = [
+  path.join(process.resourcesPath, 'icons', 'app-icon.png'),
+  path.resolve(currentDirectory, '../build/icons/app-icon.png'),
+  path.resolve(currentDirectory, '../src/assets/app-icon.png'),
+]
 
 type UnknownRecord = Record<string, unknown>
 
@@ -268,6 +274,35 @@ function getChatBackupRootPath() {
 
 function getChatBackupStoragePath(accountId: string, backupId: string) {
   return path.join(getChatBackupRootPath(), accountId, `${backupId}.json`)
+}
+
+function getRuntimeIconPath() {
+  return runtimeIconCandidates.find((candidate) => existsSync(candidate))
+}
+
+function getBrowserWindowIconOptions() {
+  if (process.platform === 'darwin') {
+    return {}
+  }
+
+  const iconPath = getRuntimeIconPath()
+  return iconPath ? { icon: iconPath } : {}
+}
+
+function applyAppIcon() {
+  const iconPath = getRuntimeIconPath()
+  if (!iconPath) {
+    return
+  }
+
+  const icon = nativeImage.createFromPath(iconPath)
+  if (icon.isEmpty()) {
+    return
+  }
+
+  if (process.platform === 'darwin') {
+    app.dock?.setIcon(icon)
+  }
 }
 
 function createTrayIcon() {
@@ -1736,6 +1771,7 @@ async function probeSessionViaWindow(partition: string, startUrl: string) {
     height: 920,
     autoHideMenuBar: true,
     backgroundColor: '#f4efe7',
+    ...getBrowserWindowIconOptions(),
     webPreferences: {
       partition,
       contextIsolation: true,
@@ -2053,6 +2089,7 @@ async function readAccountRenewalDate(
     autoHideMenuBar: true,
     backgroundColor: '#f4efe7',
     paintWhenInitiallyHidden: true,
+    ...getBrowserWindowIconOptions(),
     webPreferences: {
       partition,
       contextIsolation: true,
@@ -2676,6 +2713,7 @@ async function openAccountSessionWindow(payload: OpenAccountSessionPayload) {
     autoHideMenuBar: true,
     backgroundColor: '#f4efe7',
     title: `${payload.label} · Session`,
+    ...getBrowserWindowIconOptions(),
     webPreferences: {
       partition,
       contextIsolation: true,
@@ -2733,6 +2771,7 @@ async function openCodexWindowForAccount(payload: OpenAccountSessionPayload) {
     autoHideMenuBar: true,
     backgroundColor: '#f4efe7',
     title: `${payload.label} · Codex`,
+    ...getBrowserWindowIconOptions(),
     webPreferences: {
       partition,
       contextIsolation: true,
@@ -2766,7 +2805,6 @@ async function createWindow() {
     return
   }
 
-  const currentDirectory = path.dirname(fileURLToPath(import.meta.url))
   const preloadPath = path.join(currentDirectory, 'preload.mjs')
   const indexHtmlPath = path.join(currentDirectory, '../dist/index.html')
 
@@ -2777,6 +2815,7 @@ async function createWindow() {
     minHeight: 520,
     backgroundColor: '#f8f9fa',
     title: 'Codex Desk',
+    ...getBrowserWindowIconOptions(),
     webPreferences: {
       preload: preloadPath,
       contextIsolation: true,
@@ -3134,6 +3173,7 @@ ipcMain.handle('manager:install-update', async () => {
 
 app.whenReady().then(async () => {
   await mkdir(path.dirname(getDataFilePath()), { recursive: true })
+  applyAppIcon()
   configureAutoUpdater()
   await createWindow()
   if (app.isPackaged) {

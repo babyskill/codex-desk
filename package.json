@@ -36,6 +36,12 @@
     "directories": {
       "output": "release"
     },
+    "extraResources": [
+      {
+        "from": "build/icons/app-icon.png",
+        "to": "icons/app-icon.png"
+      }
+    ],
     "files": [
       "dist/**/*",
       "dist-electron/**/*",
@@ -43,6 +49,7 @@
     ],
     "mac": {
       "identity": null,
+      "icon": "build/icons/icon.icns",
       "category": "public.app-category.developer-tools",
       "target": [
         "dmg",
@@ -50,6 +57,7 @@
       ]
     },
     "win": {
+      "icon": "build/icons/icon.ico",
       "target": [
         "nsis",
         "portable"
