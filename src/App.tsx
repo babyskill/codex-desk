@@ -37,6 +37,9 @@ import {
   useState,
 } from 'react'
 import './App.css'
+import qrTimoImage from './assets/qr-timo.jpg'
+import qrBinanceImage from './assets/qr-binance.png'
+import appIconImage from './assets/app-icon.png'
 import { desktopApi } from './desktop'
 import {
   getIntlLocale,
@@ -3798,6 +3801,72 @@ function App() {
             </div>
           </div>
         </section>
+
+        <section className="settings-grid">
+          <article className="panel">
+            <div className="panel-head">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <img
+                  src={appIconImage}
+                  alt="Codex Desk"
+                  style={{ width: 48, height: 48, borderRadius: 12 }}
+                />
+                <div>
+                  <h2 style={{ margin: 0, fontSize: '1rem' }}>Codex Desk</h2>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-soft)' }}>
+                    {appVersion ? `v${appVersion}` : ''} · ChatGPT Plus Account Manager
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p style={{ fontSize: '0.76rem', lineHeight: 1.6, color: 'var(--text-soft)', margin: '6px 0 0' }}>
+              Quan ly account nhu mot local control center, khong phai mot form don le.
+            </p>
+          </article>
+
+          <article className="panel">
+            <div className="panel-head">
+              <div>
+                <span className="eyebrow">Support</span>
+                <h2>Ung ho tac gia</h2>
+              </div>
+            </div>
+            <p style={{ fontSize: '0.76rem', color: 'var(--text-soft)', margin: '0 0 10px' }}>
+              Neu app huu ich, ban co the ung ho tac gia qua cac kenh ben duoi.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px' }}>
+              <div className="info-box" style={{ textAlign: 'center', padding: '12px' }}>
+                <strong style={{ fontSize: '0.78rem', marginBottom: '8px', display: 'block' }}>
+                  Chuyen khoan ngan hang (VietQR)
+                </strong>
+                <img
+                  src={qrTimoImage}
+                  alt="Timo QR"
+                  style={{ width: '100%', maxWidth: 200, borderRadius: 8, margin: '0 auto', display: 'block' }}
+                />
+                <small style={{ display: 'block', marginTop: '6px', color: 'var(--text-soft)' }}>
+                  DO TAI - Timo Digital Bank by BVBank
+                </small>
+              </div>
+              <div className="info-box" style={{ textAlign: 'center', padding: '12px' }}>
+                <strong style={{ fontSize: '0.78rem', marginBottom: '8px', display: 'block' }}>
+                  Binance (USDT - BEP20)
+                </strong>
+                <img
+                  src={qrBinanceImage}
+                  alt="Binance QR"
+                  style={{ width: '100%', maxWidth: 280, borderRadius: 8, margin: '0 auto', display: 'block' }}
+                />
+                <small style={{ display: 'block', marginTop: '6px', color: 'var(--text-soft)', wordBreak: 'break-all' }}>
+                  0xb99c6199b66feffadd950957a0c2692487fdcbf1
+                </small>
+              </div>
+            </div>
+            <p style={{ fontSize: '0.72rem', textAlign: 'center', color: 'var(--text-soft)', marginTop: '10px' }}>
+              Cam on su ung ho cua ban!
+            </p>
+          </article>
+        </section>
       </div>
     )
   }
@@ -3814,9 +3883,11 @@ function App() {
     <div className="shell">
       <nav className="topnav">
         <div className="topnav-brand">
-          <div className="brand-icon">
-            <Sparkles className="icon-sm" />
-          </div>
+          <img
+            src={appIconImage}
+            alt="Codex Desk"
+            style={{ width: 22, height: 22, borderRadius: 5 }}
+          />
           <strong>Codex Desk</strong>
         </div>
 

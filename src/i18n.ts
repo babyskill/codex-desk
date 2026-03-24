@@ -1011,6 +1011,49 @@ const exactTranslations: Record<string, TranslationEntry> = {
     'लोकल लॉग से Codex उपयोग अपडेट किया गया।',
     '로컬 로그에서 Codex 사용량을 업데이트했습니다.',
   ),
+  Support: entry('Support', 'サポート', '支持', 'सहायता', '지원'),
+  'Ung ho tac gia': entry(
+    'Support the author',
+    '作者を支援する',
+    '支持作者',
+    'लेखक का समर्थन करें',
+    '작성자 후원',
+  ),
+  'Neu app huu ich, ban co the ung ho tac gia qua cac kenh ben duoi.': entry(
+    'If the app is useful, you can support the author via the channels below.',
+    'このアプリが役に立つなら、以下のチャンネルで作者を支援できます。',
+    '如果此应用对你有帮助，可以通过以下渠道支持作者。',
+    'अगर ऐप उपयोगी है, तो नीचे दिए गए माध्यमों से लेखक का समर्थन कर सकते हैं।',
+    '앱이 유용하다면 아래 채널을 통해 작성자를 후원할 수 있습니다.',
+  ),
+  'Chuyen khoan ngan hang (VietQR)': entry(
+    'Bank transfer (VietQR)',
+    '銀行振込 (VietQR)',
+    '银行转账 (VietQR)',
+    'बैंक ट्रांसफर (VietQR)',
+    '은행 이체 (VietQR)',
+  ),
+  'DO TAI - Timo Digital Bank by BVBank': entry(
+    'DO TAI - Timo Digital Bank by BVBank',
+    'DO TAI - Timo Digital Bank by BVBank',
+    'DO TAI - Timo Digital Bank by BVBank',
+    'DO TAI - Timo Digital Bank by BVBank',
+    'DO TAI - Timo Digital Bank by BVBank',
+  ),
+  'Binance (USDT - BEP20)': entry(
+    'Binance (USDT - BEP20)',
+    'Binance (USDT - BEP20)',
+    'Binance (USDT - BEP20)',
+    'Binance (USDT - BEP20)',
+    'Binance (USDT - BEP20)',
+  ),
+  'Cam on su ung ho cua ban!': entry(
+    'Thank you for your support!',
+    'ご支援ありがとうございます！',
+    '感谢您的支持！',
+    'आपके समर्थन के लिए धन्यवाद!',
+    '지원해 주셔서 감사합니다!',
+  ),
 }
 
 const dynamicRules: DynamicRule[] = [
