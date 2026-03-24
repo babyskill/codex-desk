@@ -4,13 +4,13 @@
   "version": "0.1.0",
   "author": "tai",
   "description": "Desktop app to organize multiple ChatGPT Plus/Codex accounts across macOS and Windows.",
-  "homepage": "https://github.com/Tai-DT/manager-codex",
+  "homepage": "https://github.com/Tai-DT/codex-desk",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tai-DT/manager-codex.git"
+    "url": "https://github.com/Tai-DT/codex-desk.git"
   },
   "bugs": {
-    "url": "https://github.com/Tai-DT/manager-codex/issues"
+    "url": "https://github.com/Tai-DT/codex-desk/issues"
   },
   "type": "module",
   "main": "dist-electron/main.js",
